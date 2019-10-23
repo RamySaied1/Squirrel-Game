@@ -138,5 +138,42 @@ class Squirrel(Problem['Squirrel.State', str]):
     
     # Calculate the heuristic of the given state
     def heuristic(self, state: State) -> float:
-        return state.nutsWith
+        # heuristic 1
+        #return state.nutsWith+0*len(state.stashPositions)
+
+        # heuristic 2
+        maxNutDistance = minStashDistance=0
+        maxNut=state.pos
+        minStash=state.pos
+        if (len(state.NutsPositions)>0):
+            maxNutDistance=state.NutsPositions[0].distance(state.pos)
+            maxNut = state.NutsPositions[0]
+            for nut in state.NutsPositions:
+                if state.pos.distance(nut) > maxNutDistance:
+                    maxNutDistance = state.pos.distance(nut)
+                    maxNut=nut
+        
+
+        if (len(state.stashPositions) > 0):
+            minStashDistance = state.stashPositions[0].distance(maxNut)
+            minStash = state.stashPositions[0]
+            for stash in state.stashPositions:
+                if maxNut.distance(stash) < minStashDistance:
+                    minStashDistance = maxNut.distance(stash)
+                    minStash=stash
+        
+        average = (minStash+maxNut)
+        average = Vector(average.x/2,average.y/2)
+
+        distance = average.distance(state.pos)
+
+        return distance+len(state.stashPositions)+len(state.NutsPositions)
+
+
+
+
+
+
+            
+
     

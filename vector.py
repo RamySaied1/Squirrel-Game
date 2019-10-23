@@ -1,5 +1,6 @@
 from collections.abc import Iterable, Collection
 from typing import Any
+from math import sqrt
 
 # This is a simple vector class. It can be of any size, it supports indexing and access by ".x, .y, .z & .w".
 # it also supports addition, subtraction and negation.
@@ -16,6 +17,9 @@ class Vector:
         "z": 2,
         "w": 3
     }
+
+    def distance(self,vec):
+        return sqrt(((self.x-vec.x)**2)+((self.y-vec.y)**2))
 
     def __init__(self, *components):
         # since this class is immutable, we can only set attribute values by calling __setattr__ on the parent class

@@ -46,12 +46,12 @@ def main(args):
         path_cost = 0
         current_state = initial_state
         for idx, action in enumerate(solution):
-            print(f'Action-{idx+1}:', action)
+            #print(f'Action-{idx+1}:', action)
             current_state, cost = problem.get_successor(current_state, action)
             path_cost += cost
-            print(current_state)
-            print("Cost:", cost)
-            print("Heuristic:", problem.heuristic(current_state))
+            #print(current_state)
+            #print("Cost:", cost)
+            #print("Heuristic:", problem.heuristic(current_state))
         print("Solution found with", len(solution), "steps:", solution)
         print("Total Path Cost:", path_cost)
     print('"get_successor" was called', problem_class.get_successor.count, 'time(s)')
